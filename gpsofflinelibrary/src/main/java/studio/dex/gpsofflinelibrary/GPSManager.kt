@@ -9,12 +9,7 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.os.IBinder
-import android.support.v4.content.LocalBroadcastManager
-import android.util.Log
-import android.widget.Toast
-import android.location.Criteria
 import android.os.Looper
-import java.util.concurrent.Executors
 
 
 class GPSConst {
@@ -72,7 +67,6 @@ class GPSService : Service() {
             thread = Thread(Runnable {
                 Looper.prepare()
                 while (!isServiceStop) {
-                    Log.e("gps==", "上传..")
                     if (currentLocation != null) {
                         this@GPSService.sendBroadcast(Intent()
                             .apply {
@@ -101,7 +95,6 @@ class GPSService : Service() {
     }
 
     override fun onDestroy() {
-        Log.e("gps==", "onDestroy")
 //        将监听的线程删除
         thread?.interrupt()
         thread = null
